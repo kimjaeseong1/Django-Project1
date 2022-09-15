@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+{%block con%}
+   <div class="container mt-5 mb-5" style="font-size: 20px; font-weight: bold;">
+        <h1><b>찬양을 추천해주세요!! </b></h1>
+
+
+        <form method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+                <div class="mb-3 mt-5">
+                    <label class="form-label">찬양 제목</label>
+                    <input type="text" name="sub" class="form-control " placeholder="찬양 제목을 입력해주세요~ ">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">추천하는 이유~</label>
+                    <input type="text" name="con" class="form-control" placeholder="찬양을 추천하시면서 은혜받은 부분을 나눠주시면 좋겠습니다~ 없으면 생략 가능해요~~ ">
+                </div>
+                <div  class="mb-3">
+                    <label class="form-label">악보도 올려주세요~ </label>
+                    <input type="file" name="pic" class="form-control ">
+                </div>
+                
+        
+                <div class="text-end mt-4">
+                    <button class="btn btn-dark">추천완료!</button>
+
+                </div>
+            </div>
+        </form>
+
+{% endblock %}

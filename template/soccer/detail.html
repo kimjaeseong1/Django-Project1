@@ -1,0 +1,62 @@
+{% extends 'base.html'%}
+{%block con%}
+<div class="container mt-5 mb-5">
+<h1><b>{{d.subject}} </b></h1><br>
+
+        
+    <table class="table table-bordered  text-center ">
+        <thead>
+        <tr>
+            <th scope="col"  style="background-color: rgba(245, 240, 179, 0.97);">제목</th>
+            <td><b>{{s.subject}}</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row" style="background-color: rgba(245, 240, 179, 0.97);">글쓴이</th>
+            <td><b>관리자</b></td>
+            
+        </tr>
+        <tr>
+            <th scope="row" style="background-color: rgba(245, 240, 179, 0.97);">날짜</th>
+            <td><b>{{d.pudate|date:'Y년 n월 j일 H:i'}}</b></td>
+        
+        </tr>
+        
+        </tbody>
+    </table>
+
+    <div class="row mt-5 text-center">
+
+        <div class="text-nowrap" style="width: 8rem;">
+            
+            {{d.content}}
+            
+
+        </div>
+        
+
+        {% for i in diset%}    
+        <div class="row mt-5 ">
+                        <div class="col-lg-10">
+                            <img src="{{i.image.url}}" width="100%">
+                        </div>
+
+                </div>
+
+        {%endfor%}
+
+    </div>
+    
+    <div class="text-end">
+        <a href="{% url 'soccer:index'%}" ><button class="btn btn-success btn-lg">글 목록</button> </a>
+    </div>
+
+
+
+
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base.html'%}
+{%block con%}
+{% load mathfilters %}
+
+<div class="container mt-5 mb-5">
+    <h1><b>활기찬 청년부 소식!!</b></h1>
+
+   <div class="row">
+
+        {%for i in sset %}
+
+       <div class="col-lg-4" >
+            <a href="{% url 'news:detail' i.id %}">
+                <div class="card bg-dark text-white  " >
+                <img src="{{i.pic.url}}" class="card-img" alt="{{i.pudate}}" style="width: 100%;">
+                    <div class="card-img-overlay ">
+                        <h3 class="card-title"><b>{{i.subject}}</b></h3>
+                        
+                    
+                    </div>
+
+                    
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+
+    </div> 
+    <nav aria-label="Page navigation example" class="mt-5">
+        <ul class="pagination justify-content-center">
+
+            {% if sset.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'news:index' %}?page=1&kw={{kw}}&cate={{cate}}">처음</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'news:index' %}?page={{ sset.previous_page_number }}&kw={{kw}}&cate={{cate}}">이전</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">처음</a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link">이전</a>
+                </li>
+            {% endif %}
+            
+            {% for i in sset.paginator.page_range %}
+                {% if i >= sset.number|sub:5 and sset.number|add:4 >= i %}
+                    <li class="page-item {% if sset.number == i %} active {% endif %}"><a class="page-link" href="{% url 'news:index' %}?page={{i}}&kw={{kw}}&cate={{cate}}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+
+            {% if sset.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'news:index' %}?page={{ sset.next_page_number }}&kw={{kw}}&cate={{cate}}">다음</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'news:index' %}?page={{ sset.paginator.num_pages }}&kw={{kw}}&cate={{cate}}">마지막</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">다음</a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link">마지막</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <form>
+        <div class="row mt-4"> 
+            <div class="col-lg-2">
+                <select name="cate" class="form-select mb-3" aria-label=".form-select-lg example">
+                    <option value="sub" {% if cate == 'sub' %} selected {% endif %}>제목</option>
+                    <option value="con" {% if cate == 'con' %} selected {% endif %}>내용</option>
+                </select>
+            </div>
+            <div class="col-lg-8">
+                <input type="text" name="kw" value="{{kw}}" class="form-control">
+            </div>
+            <div class="col-lg-2 text-center">
+                <button class="btn btn-dark">검색</button>
+                <a href="{% url 'news:index' %}" class="btn btn-dark">리셋</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+    a:hover{
+        opacity: 0.5;
+    }
+</style>
+{% endblock %}

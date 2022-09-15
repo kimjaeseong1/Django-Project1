@@ -1,0 +1,54 @@
+{% extends 'base.html'%}
+{%block con%}
+
+    <div class="container mt-5 mb-5">
+        <h1><b>{{r.제목}}</b></h1>
+        <div class="row mt-5">
+            <div class="col-lg-8">
+                <textarea class="form-control" disabled style="height:250px">{{r.content}} </textarea>
+
+            </div>
+
+            <div class="col-lg-4">
+                <img src="{{r.글쓴이.getpic}}" width="100%">
+                <div class="text-center mt-3">
+                        {{r.pudate|date:'Y년 n월 j일 H:i'}}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="text-end mt-4">
+            <a class="btn btn-outline-dark" href="{% url 'radio:index' %}">글 목록</a>
+            <a class="btn btn-outline-dark" href="{% url 'radio:update' r.id %}">글 수정</a>
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#remove">글 삭제</button>
+        </div>
+
+    </div>
+
+  
+
+     <!-- 게시글 삭제 알림창 -->
+     <div class="modal fade" id="remove" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">게시글 삭제 알림</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="modal-body text-center">
+                    <h3>정말 삭제하시겠습니까?</h3>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+             <a href="{%url 'radio:delete' r.id %}"> <button type="button" class="btn btn-outline-danger">삭제</button></a>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+{% endblock %}

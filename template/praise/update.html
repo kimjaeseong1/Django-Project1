@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+{%block con%}
+<div class="container mt-5 mb-5" style="font-size: 20px; font-weight: bold;">
+
+    <h1><b>게시글 수정</b></h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3 mt-5">
+            <label class="form-label">제목</label>
+            <input type="text" name="sub" value="{{p.제목}}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label class="form-control">작성자</label>
+            <input type="type" class="form-control" disabled value="{{p.작성자}}">
+        </div>
+        <div class="mb-3">
+            <label class="form-control">악보</label>
+            <input type="file"  value="{{p.pic}}" name="pic" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label class="form-label"> content</label>
+            <textarea class="form-control" name="con" style="height: 150px;">{{p.content}}</textarea>
+        </div>
+        <div class="text-end mt-3">
+            <button class="btn btn-outline-primary"> 수정 </button>
+        </div>
+
+        
+    </form>
+</div>
+
+
+
+
+
+
+{% endblock %}

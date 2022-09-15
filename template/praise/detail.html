@@ -1,0 +1,67 @@
+{% extends 'base.html'%}
+{%block con%}
+
+    <div class="container mt-5 mb-5">
+        <h1><b>{{p.제목}}</b></h1>
+        <hr>
+        <div class="row mt-5">
+            <div class="text-nowrap col-lg-8" style="width: 8rem;">
+            
+                {{p.content}}
+                
+    
+            </div>
+            <!-- <div class="col-lg-8">
+                <textarea class="form-control" disabled style="height:250px" >{{p.content}} </textarea>
+
+            </div> -->
+
+            <!-- <div class="col-lg-4">
+                <img src="{{p.작성자.getpic}}" width="100%">
+               
+            </div> -->
+            
+        </div>
+
+        
+           <div class="mt-5 text-center">
+                <img src="{{p.pic.url}}" width="50%">
+            </div>
+            
+           
+      
+        <div class="text-end mt-4">
+            <a class="btn btn-outline-dark" href="{% url 'praise:index' %}">글 목록</a>
+            <a class="btn btn-outline-dark" href="{% url 'praise:update' p.id %}">글 수정</a>
+            {% if user.username == "master" %}
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#remove">글 삭제</button>
+            {% endif %}
+          </div>
+
+    </div>
+
+  
+
+     <!-- 게시글 삭제 알림창 -->
+     <div class="modal fade" id="remove" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">게시글 삭제 알림</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="modal-body text-center">
+                    <h3>정말 삭제하시겠습니까?</h3>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+             <a href="{% url 'praise:delete' p.id %}"> <button type="button" class="btn btn-outline-danger">삭제</button></a>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+{% endblock %}
